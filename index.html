@@ -216,44 +216,51 @@
       font-size: 0.95rem;
     }
 
-    .signal-map {
-      position: relative;
-      min-height: 250px;
+    .snapshot {
       padding: 22px;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(16, 24, 40, 0.06) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(16, 24, 40, 0.06) 1px, transparent 1px),
-        linear-gradient(135deg, rgba(29, 78, 216, 0.14), rgba(4, 120, 87, 0.12));
-      background-size: 28px 28px, 28px 28px, auto;
+      background: #f8fafc;
     }
 
-    .node {
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border: 3px solid white;
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.18), 0 8px 18px rgba(16, 24, 40, 0.18);
+    .snapshot-title {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .node.a { left: 18%; top: 28%; background: var(--blue); }
-    .node.b { right: 26%; top: 21%; background: var(--green); }
-    .node.c { left: 44%; bottom: 26%; background: var(--amber); }
-    .node.d { right: 14%; bottom: 20%; background: var(--violet); }
+    .snapshot-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+    }
 
-    .map-label {
-      position: absolute;
-      left: 22px;
-      bottom: 22px;
-      max-width: calc(100% - 44px);
-      padding: 12px 14px;
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.88);
+    .snapshot-row {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .snapshot-row dt {
       color: #344054;
-      font-weight: 750;
-      font-size: 0.92rem;
-      box-shadow: 0 10px 26px rgba(16, 24, 40, 0.1);
+      font-size: 0.82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .snapshot-row dd {
+      margin: 0;
+      color: #475467;
+      font-size: 0.95rem;
+    }
+
+    .snapshot-row strong {
+      color: var(--ink);
+      font-weight: 850;
     }
 
     .stats {
@@ -582,6 +589,7 @@
       .nav-links a { padding: 0 8px; font-size: 0.86rem; }
       .portrait-wrap { grid-template-columns: 1fr; }
       .portrait { width: 104px; height: 104px; }
+      .snapshot-row { grid-template-columns: 1fr; gap: 4px; }
       section { padding: 56px 0; }
       .button { width: 100%; }
     }
@@ -625,16 +633,26 @@
         <div class="portrait-wrap">
           <img class="portrait" src="images/Akhil_dp.jfif" alt="Akhil Singampalli profile photo" />
           <div class="portrait-copy">
-            <h2>Scalable AI Systems & Embedded TinyML</h2>
-            <p>Advised by Dr. Sudeep Pasricha. Building learning systems that survive domain shift, new classes, edge constraints, and hostile update streams.</p>
+            <h2>PhD Researcher in Computer Engineering</h2>
+            <p>Colorado State University, EPIC Lab. Advised by Dr. Sudeep Pasricha.</p>
           </div>
         </div>
-        <div class="signal-map" aria-hidden="true">
-          <span class="node a"></span>
-          <span class="node b"></span>
-          <span class="node c"></span>
-          <span class="node d"></span>
-          <div class="map-label">Continual learning + sensor intelligence + trustworthy edge deployment</div>
+        <div class="snapshot" aria-label="Research snapshot">
+          <p class="snapshot-title">Research Snapshot</p>
+          <dl class="snapshot-list">
+            <div class="snapshot-row">
+              <dt>Focus</dt>
+              <dd><strong>Continual learning</strong>, federated resilience, explainable AI, and TinyML for sensor-driven systems.</dd>
+            </div>
+            <div class="snapshot-row">
+              <dt>Systems</dt>
+              <dd>Smartphone indoor localization, Wi-Fi fingerprinting, edge inference, robotics, and mobile sensing pipelines.</dd>
+            </div>
+            <div class="snapshot-row">
+              <dt>Methods</dt>
+              <dd>Mixture-of-experts, VAEs, representation memory, gradient saliency, model quantization, and TFLite benchmarking.</dd>
+            </div>
+          </dl>
         </div>
       </aside>
     </div>
