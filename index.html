@@ -333,6 +333,61 @@
       gap: 18px;
     }
 
+    .figure-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .figure-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .figure-card.featured {
+      box-shadow: var(--shadow);
+    }
+
+    .figure-media {
+      background: #0b1220;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .figure-media img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+    }
+
+    .figure-copy {
+      padding: 18px;
+    }
+
+    .figure-copy h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      line-height: 1.25;
+    }
+
+    .figure-copy p {
+      margin: 0;
+      color: #475467;
+      font-size: 0.94rem;
+    }
+
+    .figure-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .figure-grid-extra {
+      margin-top: 18px;
+    }
+
     .card {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -514,7 +569,7 @@
 
     @media (max-width: 900px) {
       .hero { min-height: auto; }
-      .hero-inner, .contact-band { grid-template-columns: 1fr; }
+      .hero-inner, .contact-band, .figure-layout { grid-template-columns: 1fr; }
       .stats, .grid-3, .grid-2 { grid-template-columns: 1fr; }
       .matrix-row, .role { grid-template-columns: 1fr; }
       .hero-inner { padding-top: 58px; }
@@ -538,7 +593,7 @@
       <ul class="nav-links">
         <li><a href="#research">Research</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#impact">Impact</a></li>
+        <li><a href="#figures">Figures</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -567,7 +622,7 @@
 
       <aside class="hero-panel" aria-label="Profile summary">
         <div class="portrait-wrap">
-          <img class="portrait" src="https://avatars.githubusercontent.com/u/92922964?v=4" alt="Akhil Singampalli profile photo" />
+          <img class="portrait" src="images/Akhil_dp.jfif" alt="Akhil Singampalli profile photo" />
           <div class="portrait-copy">
             <h2>Scalable AI Systems & Embedded TinyML</h2>
             <p>Advised by Dr. Sudeep Pasricha. Building learning systems that survive domain shift, new classes, edge constraints, and hostile update streams.</p>
@@ -628,24 +683,62 @@
       </div>
     </section>
 
-    <section id="impact">
+    <section id="figures">
       <div class="wrap">
         <div class="section-head">
-          <p class="kicker">Industry Value</p>
-          <h2>Built for senior research and engineering roles at the edge of AI deployment.</h2>
+          <p class="kicker">Research Figures</p>
+          <h2>Visual systems work: from adaptive localization to resilient edge intelligence.</h2>
+          <p class="lede">These figures give the site more of your actual research texture: indoor localization pipelines, continual learning architectures, domain adaptation, mixture-of-experts routing, and federated attack resilience.</p>
         </div>
-        <div class="grid-3">
-          <article class="card accent-blue">
-            <h3>Senior / Staff Research Scientist</h3>
-            <p>Lifelong learning, domain adaptation, trustworthy AI, federated learning, and scalable model architectures for non-stationary real-world data.</p>
+        <div class="figure-layout">
+          <article class="figure-card featured">
+            <div class="figure-media">
+              <img src="images/research/1.png" alt="Unified class and domain incremental learning framework for indoor localization" />
+            </div>
+            <div class="figure-copy">
+              <h3>Unified continual learning for changing buildings, devices, and regions</h3>
+              <p>A deployment-oriented view of indoor localization where class and domain shifts are handled as the environment, device population, and reference regions evolve.</p>
+            </div>
           </article>
-          <article class="card accent-green">
-            <h3>Edge AI / TinyML Engineer</h3>
-            <p>Computer vision, localization, signal processing, sensor fusion, and efficient deployment onto mobile, IoT, robotics, and embedded platforms.</p>
+          <div class="figure-stack">
+            <article class="figure-card">
+              <div class="figure-media">
+                <img src="images/research/3.png" alt="CIELO continual path learning and representation memory management framework" />
+              </div>
+              <div class="figure-copy">
+                <h3>CIELO: continual path learning</h3>
+                <p>Representation memory management for learning new paths while preserving prior localization knowledge.</p>
+              </div>
+            </article>
+            <article class="figure-card">
+              <div class="figure-media">
+                <img src="images/research/5.png" alt="Federated learning and data poisoning attack setup for indoor localization" />
+              </div>
+              <div class="figure-copy">
+                <h3>SAFELOC / ARMOR: resilient federated AI</h3>
+                <p>Threat-aware learning pipelines for detecting and mitigating poisoning attacks in distributed localization systems.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="grid-2 figure-grid-extra">
+          <article class="figure-card">
+            <div class="figure-media">
+              <img src="images/research/2.png" alt="DAILOC domain-aware incremental learning with disentangled representation adaptation" />
+            </div>
+            <div class="figure-copy">
+              <h3>DAILOC: domain-aware adaptation</h3>
+              <p>Disentangled representation learning and class latent alignment for temporal and device-induced domain shifts.</p>
+            </div>
           </article>
-          <article class="card accent-violet">
-            <h3>ML Systems / AI Infrastructure</h3>
-            <p>Distributed training workflows, HPC profiling, MLOps tooling, CI/CD, runtime reproducibility, and foundation model infrastructure support.</p>
+          <article class="figure-card">
+            <div class="figure-media">
+              <img src="images/research/4.png" alt="Mixture-of-experts architecture with gating probabilities for indoor localization" />
+            </div>
+            <div class="figure-copy">
+              <h3>MOELO: mixture-of-experts routing</h3>
+              <p>Compact expert routing for scalable class and domain incremental learning under mobile deployment constraints.</p>
+            </div>
           </article>
         </div>
       </div>
