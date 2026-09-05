@@ -3,603 +3,1123 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Akhil Singampalli | Scalable AI Systems & Embedded TinyML</title>
-  <meta name="description" content="Akhil Singampalli is a PhD researcher in Computer Engineering at Colorado State University working on scalable AI systems, continual learning, TinyML, trustworthy AI, and embedded edge intelligence." />
-  <meta name="theme-color" content="#101828" />
-  <meta property="og:title" content="Akhil Singampalli | Scalable AI Systems & Embedded TinyML" />
+  <title>Akhil Singampalli | Continual Learning, Trustworthy AI &amp; Edge TinyML</title>
+  <meta name="description" content="Akhil Singampalli is a PhD researcher in Computer Engineering at Colorado State University (EPIC Lab) working on continual learning, trustworthy and explainable AI, adversarially resilient federated learning, and TinyML for edge deployment." />
+  <meta name="author" content="Akhil Singampalli" />
+  <link rel="canonical" href="https://akhil-singampalli.github.io/akhil-site/" />
+
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Akhil Singampalli | Continual Learning, Trustworthy AI &amp; Edge TinyML" />
   <meta property="og:description" content="PhD researcher at Colorado State University building robust, explainable, and efficient AI systems for edge deployment." />
-  <meta property="og:type" content="website" />
   <meta property="og:url" content="https://akhil-singampalli.github.io/akhil-site/" />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/92922964?v=4" />
+  <meta property="og:image" content="https://akhil-singampalli.github.io/akhil-site/images/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Akhil Singampalli, PhD researcher in Computer Engineering, Colorado State University EPIC Lab." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Akhil Singampalli | Continual Learning, Trustworthy AI &amp; Edge TinyML" />
+  <meta name="twitter:description" content="PhD researcher at Colorado State University building robust, explainable, and efficient AI systems for edge deployment." />
+  <meta name="twitter:image" content="https://akhil-singampalli.github.io/akhil-site/images/og-card.png" />
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="images/portrait-256.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" />
+
+  <script>
+    /* Runs before first paint so the saved theme never flashes. */
+    (function () {
+      var r = document.documentElement;
+      r.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') r.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
   <style>
+    /* ==================== Design tokens ==================== */
     :root {
-      --ink: #101828;
-      --muted: #667085;
-      --line: #d0d5dd;
-      --paper: #ffffff;
-      --wash: #f8fafc;
-      --blue: #1d4ed8;
-      --green: #047857;
-      --amber: #b45309;
-      --violet: #6d28d9;
-      --shadow: 0 18px 48px rgba(16, 24, 40, 0.12);
-      --radius: 8px;
-      --max: 1160px;
+      --bg: #ffffff;
+      --bg-sunken: #f5f8f8;
+      --surface: #ffffff;
+      --surface-2: #f7fafa;
+      --ink: #0f1419;
+      --ink-2: #384049;
+      --ink-3: #5f6b75;
+      --line: #e3e9ea;
+      --line-strong: #c9d4d5;
+
+      --brand: #0d5c63;
+      --brand-hover: #0a474d;
+      --on-brand: #ffffff;
+      --brand-wash: #e6f2f2;
+
+      --t1: #0d5c63;  --t1-wash: #e6f2f2;   /* continual learning */
+      --t2: #6d28d9;  --t2-wash: #f1ebfd;   /* trustworthy / explainable */
+      --t3: #b45309;  --t3-wash: #fdf0e0;   /* edge & tinyml */
+      --t4: #475467;  --t4-wash: #eef1f4;   /* neutral */
+
+      --sh-1: 0 1px 2px rgba(15,20,25,.05), 0 1px 3px rgba(15,20,25,.04);
+      --sh-2: 0 4px 10px rgba(15,20,25,.05), 0 12px 28px rgba(15,20,25,.07);
+      --sh-3: 0 10px 24px rgba(15,20,25,.08), 0 28px 64px rgba(15,20,25,.12);
+      --overlay: rgba(9,13,17,.8);
+      --nav-bg: rgba(255,255,255,.82);
+      --hero-glow-1: rgba(13,92,99,.09);
+      --hero-glow-2: rgba(180,83,9,.07);
+
+      --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+      --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
+
+      --r-sm: 6px; --r: 10px; --r-lg: 16px; --r-full: 999px;
+      --max: 1180px;
+      --nav-h: 66px;
+      --ease: cubic-bezier(.2,.7,.3,1);
+
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-serif: Newsreader, ui-serif, Georgia, "Times New Roman", serif;
     }
 
+    /* Dark palette, defined once and applied to both the system default and the
+       explicit toggle so neither can win by accident. */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #0b0f14;
+        --bg-sunken: #0e141a;
+        --surface: #121a22;
+        --surface-2: #16202a;
+        --ink: #e9eff3;
+        --ink-2: #c3cfd8;
+        --ink-3: #8d9ba7;
+        --line: #223040;
+        --line-strong: #33445a;
+
+        --brand: #4dd0c7;
+        --brand-hover: #7ee0d9;
+        --on-brand: #06222a;
+        --brand-wash: #102f31;
+
+        --t1: #4dd0c7;  --t1-wash: #102f31;
+        --t2: #a78bfa;  --t2-wash: #241b3d;
+        --t3: #f0b429;  --t3-wash: #33260a;
+        --t4: #94a3b8;  --t4-wash: #1b2430;
+
+        --sh-1: 0 1px 2px rgba(0,0,0,.4);
+        --sh-2: 0 4px 10px rgba(0,0,0,.35), 0 12px 28px rgba(0,0,0,.45);
+        --sh-3: 0 10px 24px rgba(0,0,0,.45), 0 28px 64px rgba(0,0,0,.6);
+        --overlay: rgba(3,6,9,.88);
+        --nav-bg: rgba(11,15,20,.82);
+        --hero-glow-1: rgba(77,208,199,.10);
+        --hero-glow-2: rgba(240,180,41,.07);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --bg-sunken: #0e141a;
+      --surface: #121a22;
+      --surface-2: #16202a;
+      --ink: #e9eff3;
+      --ink-2: #c3cfd8;
+      --ink-3: #8d9ba7;
+      --line: #223040;
+      --line-strong: #33445a;
+
+      --brand: #4dd0c7;
+      --brand-hover: #7ee0d9;
+      --on-brand: #06222a;
+      --brand-wash: #102f31;
+
+      --t1: #4dd0c7;  --t1-wash: #102f31;
+      --t2: #a78bfa;  --t2-wash: #241b3d;
+      --t3: #f0b429;  --t3-wash: #33260a;
+      --t4: #94a3b8;  --t4-wash: #1b2430;
+
+      --sh-1: 0 1px 2px rgba(0,0,0,.4);
+      --sh-2: 0 4px 10px rgba(0,0,0,.35), 0 12px 28px rgba(0,0,0,.45);
+      --sh-3: 0 10px 24px rgba(0,0,0,.45), 0 28px 64px rgba(0,0,0,.6);
+      --overlay: rgba(3,6,9,.88);
+      --nav-bg: rgba(11,15,20,.82);
+      --hero-glow-1: rgba(77,208,199,.10);
+      --hero-glow-2: rgba(240,180,41,.07);
+    }
+
+    /* ==================== Base ==================== */
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + var(--s5));
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       margin: 0;
+      background: var(--bg);
       color: var(--ink);
-      background: var(--paper);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; }
     img { max-width: 100%; display: block; }
+    a { color: inherit; }
 
+    /* Beats any component `display` rule, so [hidden] always actually hides. */
+    [hidden] { display: none !important; }
+
+    h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; margin: 0; }
+
+    h1 {
+      font-size: clamp(2.9rem, 6.4vw, 5.5rem);
+      line-height: .98;
+      letter-spacing: -.028em;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.1vw, 2.75rem);
+      line-height: 1.12;
+      letter-spacing: -.02em;
+    }
+
+    h3 { font-size: 1.14rem; line-height: 1.34; letter-spacing: -.008em; }
+
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+      border-radius: var(--r-sm);
+    }
+
+    ::selection { background: var(--brand); color: var(--on-brand); }
+
+    .wrap { width: min(var(--max), calc(100% - var(--s7))); margin: 0 auto; }
+
+    .skip-link {
+      position: absolute;
+      left: var(--s4);
+      top: -100px;
+      z-index: 200;
+      padding: var(--s3) var(--s5);
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: var(--r);
+      font-weight: 600;
+      text-decoration: none;
+      transition: top .2s var(--ease);
+    }
+    .skip-link:focus { top: var(--s4); }
+
+    /* ==================== Scroll reveal ==================== */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+      transition-delay: var(--d, 0s);
+    }
+    .js .reveal.is-in { opacity: 1; transform: none; }
+
+    /* ==================== Navigation ==================== */
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(255, 255, 255, 0.86);
-      border-bottom: 1px solid rgba(208, 213, 221, 0.75);
+      z-index: 60;
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px) saturate(150%);
+      -webkit-backdrop-filter: blur(14px) saturate(150%);
+      border-bottom: 1px solid transparent;
+      transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
     }
+    .nav.is-stuck { border-bottom-color: var(--line); box-shadow: var(--sh-1); }
 
     .nav-inner {
-      width: min(var(--max), calc(100% - 36px));
+      width: min(var(--max), calc(100% - var(--s7)));
       margin: 0 auto;
+      min-height: var(--nav-h);
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      min-height: 68px;
-      gap: 20px;
+      gap: var(--s4);
     }
 
     .brand {
-      font-weight: 800;
-      letter-spacing: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s3);
+      margin-right: auto;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -.015em;
       text-decoration: none;
       white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--brand);
+      color: var(--on-brand);
+      font-size: .95rem;
+      line-height: 1;
+      padding-bottom: 2px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: var(--s1);
       margin: 0;
       padding: 0;
       list-style: none;
-      flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
     .nav-links a {
+      position: relative;
       display: inline-flex;
-      min-height: 38px;
       align-items: center;
-      padding: 0 11px;
-      border-radius: 6px;
-      color: #344054;
+      min-height: 36px;
+      padding: 0 10px;
+      border-radius: var(--r-sm);
+      color: var(--ink-3);
       text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 650;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s var(--ease), background-color .2s var(--ease);
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 10px; right: 10px; bottom: 2px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s var(--ease);
+    }
+    .nav-links a:hover { color: var(--ink); background: var(--surface-2); }
+    .nav-links a.is-active { color: var(--ink); font-weight: 600; }
+    .nav-links a.is-active::after { transform: scaleX(1); }
+
+    .nav-tools { display: flex; align-items: center; gap: var(--s2); }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 38px; height: 38px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      background: var(--surface);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .icon-btn:hover { color: var(--brand); border-color: var(--brand); transform: translateY(-1px); }
+    .icon-btn svg { width: 18px; height: 18px; }
+
+    /* Sun shows in light, moon in dark — driven by the same rules the palette uses. */
+    .theme-toggle .moon { display: none; }
+    :root[data-theme="dark"] .theme-toggle .moon { display: block; }
+    :root[data-theme="dark"] .theme-toggle .sun { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .theme-toggle .moon { display: block; }
+      :root:not([data-theme="light"]) .theme-toggle .sun { display: none; }
     }
 
-    .nav-links a:hover { background: #f2f4f7; color: var(--ink); }
+    .nav-toggle { display: none; }
 
-    .hero {
-      min-height: calc(100vh - 68px);
-      display: grid;
+    /* ==================== Buttons ==================== */
+    .button {
+      display: inline-flex;
       align-items: center;
-      background:
-        linear-gradient(115deg, rgba(29, 78, 216, 0.08), transparent 35%),
-        linear-gradient(245deg, rgba(4, 120, 87, 0.11), transparent 42%),
-        #ffffff;
+      justify-content: center;
+      gap: var(--s2);
+      min-height: 44px;
+      padding: 0 var(--s5);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r);
+      background: var(--surface);
+      color: var(--ink);
+      font: inherit;
+      font-size: .94rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s var(--ease), box-shadow .25s var(--ease),
+                  background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
+    }
+    .button svg { width: 17px; height: 17px; flex: none; }
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--brand);
+      color: var(--brand);
+      box-shadow: var(--sh-2);
+    }
+
+    .button.primary {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--on-brand);
+      box-shadow: var(--sh-2);
+    }
+    .button.primary:hover {
+      background: var(--brand-hover);
+      border-color: var(--brand-hover);
+      color: var(--on-brand);
+      box-shadow: var(--sh-3);
+    }
+
+    /* ==================== Hero ==================== */
+    .hero {
+      position: relative;
+      overflow: hidden;
       border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(ellipse 70% 60% at 12% 0%, var(--hero-glow-1), transparent 60%),
+        radial-gradient(ellipse 60% 55% at 95% 15%, var(--hero-glow-2), transparent 62%),
+        var(--bg);
     }
 
     .hero-inner {
-      width: min(var(--max), calc(100% - 36px));
+      width: min(var(--max), calc(100% - var(--s7)));
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
-      gap: 56px;
+      grid-template-columns: minmax(0, 1.3fr) minmax(320px, .7fr);
+      gap: var(--s8);
       align-items: center;
-      padding: 82px 0 64px;
+      padding: var(--s9) 0 var(--s8);
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin: 0 0 18px;
-      color: var(--blue);
-      font-weight: 800;
+      gap: var(--s3);
+      margin: 0 0 var(--s5);
+      color: var(--brand);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
     }
-
     .eyebrow::before {
       content: "";
-      width: 34px;
-      height: 2px;
+      width: 32px; height: 2px;
+      border-radius: 2px;
       background: currentColor;
-      border-radius: 999px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 820px;
-      font-size: clamp(3rem, 6vw, 6.7rem);
-      line-height: 0.94;
-      letter-spacing: 0;
     }
 
     .hero-subtitle {
-      margin: 22px 0 0;
-      color: #344054;
-      max-width: 760px;
-      font-size: clamp(1.15rem, 2vw, 1.55rem);
-      line-height: 1.42;
+      margin: var(--s5) 0 0;
+      max-width: 40ch;
+      color: var(--ink-2);
+      font-size: clamp(1.08rem, 1.5vw, 1.32rem);
+      line-height: 1.5;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 7px;
-      border: 1px solid var(--ink);
-      text-decoration: none;
-      font-weight: 800;
-      color: var(--ink);
-      background: transparent;
-    }
-
-    .button.primary {
-      background: var(--ink);
-      color: white;
-      box-shadow: 0 12px 26px rgba(16, 24, 40, 0.18);
-    }
-
-    .button:hover { transform: translateY(-1px); }
-
-    .hero-panel {
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid rgba(208, 213, 221, 0.9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .portrait-wrap {
-      display: grid;
-      grid-template-columns: 116px 1fr;
-      gap: 18px;
-      align-items: center;
-      padding: 22px;
-      border-bottom: 1px solid var(--line);
-      background: #f8fafc;
-    }
-
-    .portrait {
-      width: 116px;
-      height: 116px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid white;
-      box-shadow: 0 10px 24px rgba(16, 24, 40, 0.16);
-    }
-
-    .portrait-copy h2 {
-      margin: 0 0 4px;
-      font-size: 1.25rem;
-      line-height: 1.2;
-    }
-
-    .portrait-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .snapshot {
-      padding: 22px;
-      background: #f8fafc;
-    }
-
-    .snapshot-title {
-      margin: 0 0 14px;
-      color: var(--blue);
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .snapshot-list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-    }
-
-    .snapshot-row {
-      display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 14px;
-      padding: 12px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .snapshot-row dt {
-      color: #344054;
-      font-size: 0.82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .snapshot-row dd {
-      margin: 0;
-      color: #475467;
-      font-size: 0.95rem;
-    }
-
-    .snapshot-row strong {
-      color: var(--ink);
-      font-weight: 850;
+      gap: var(--s3);
+      margin-top: var(--s6);
     }
 
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 42px;
-    }
-
-    .stat {
-      border-left: 3px solid var(--blue);
-      background: rgba(255, 255, 255, 0.72);
-      padding: 14px 14px 12px;
+      gap: var(--s5) var(--s4);
+      margin-top: var(--s8);
+      padding-top: var(--s6);
+      border-top: 1px solid var(--line);
     }
 
     .stat strong {
       display: block;
-      font-size: 1.6rem;
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 600;
       line-height: 1;
+      letter-spacing: -.02em;
+      color: var(--ink);
     }
-
     .stat span {
-      color: var(--muted);
-      font-size: 0.86rem;
-      font-weight: 650;
+      display: block;
+      margin-top: var(--s2);
+      color: var(--ink-3);
+      font-size: .84rem;
+      line-height: 1.4;
     }
 
-    section {
-      padding: 76px 0;
+    .hero-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-3);
+      overflow: hidden;
+    }
+
+    .portrait-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--s5);
+      padding: var(--s6);
+      background: var(--surface-2);
       border-bottom: 1px solid var(--line);
     }
 
-    section:nth-of-type(even) { background: var(--wash); }
-
-    .wrap {
-      width: min(var(--max), calc(100% - 36px));
-      margin: 0 auto;
+    .portrait {
+      width: 92px; height: 92px;
+      flex: none;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--surface);
+      box-shadow: var(--sh-2);
     }
 
-    .section-head {
-      max-width: 780px;
-      margin-bottom: 34px;
-    }
+    .portrait-copy p { margin: 0; color: var(--ink-2); font-size: .95rem; line-height: 1.45; }
+    .portrait-copy .advisor { color: var(--ink-3); font-size: .88rem; margin-top: var(--s1); }
 
-    .kicker {
-      margin: 0 0 8px;
-      color: var(--blue);
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.08em;
+    .snapshot { padding: var(--s6); }
+
+    .snapshot-title {
+      margin: 0 0 var(--s4);
+      color: var(--brand);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
-    h2 {
-      margin: 0;
-      font-size: clamp(2rem, 3.4vw, 3.3rem);
-      line-height: 1.04;
-      letter-spacing: 0;
+    .snapshot-list { display: grid; gap: var(--s4); margin: 0; }
+
+    .snapshot-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: var(--s4);
+      padding-top: var(--s4);
+      border-top: 1px solid var(--line);
+    }
+    .snapshot-row:first-child { padding-top: 0; border-top: 0; }
+
+    .snapshot-row dt {
+      color: var(--ink-3);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .snapshot-row dd { margin: 0; color: var(--ink-2); font-size: .92rem; line-height: 1.5; }
+    .snapshot-row dd strong { color: var(--ink); font-weight: 600; }
+
+    /* ==================== Sections ==================== */
+    section { padding: var(--s10) 0; }
+    section.sunken { background: var(--bg-sunken); border-block: 1px solid var(--line); }
+
+    .section-head { max-width: 46rem; margin-bottom: var(--s8); }
+    .section-head.wide { max-width: 54rem; }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      margin: 0 0 var(--s4);
+      color: var(--brand);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .kicker::before {
+      content: "";
+      width: 24px; height: 2px;
+      border-radius: 2px;
+      background: currentColor;
     }
 
     .lede {
-      margin: 16px 0 0;
-      color: #475467;
-      font-size: 1.09rem;
-      max-width: 850px;
+      margin: var(--s4) 0 0;
+      max-width: 62ch;
+      color: var(--ink-2);
+      font-size: 1.06rem;
+      line-height: 1.65;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s5); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .figure-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .figure-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      min-height: 100%;
-    }
-
-    .figure-card.featured {
-      box-shadow: var(--shadow);
-    }
-
-    .figure-media {
-      background: #eef2f6;
-      border-bottom: 1px solid var(--line);
-      box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.04);
-    }
-
-    .figure-media img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: contain;
-    }
-
-    .figure-copy {
-      padding: 18px;
-    }
-
-    .figure-copy h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-      line-height: 1.25;
-    }
-
-    .figure-copy p {
-      margin: 0;
-      color: #475467;
-      font-size: 0.94rem;
-    }
-
-    .figure-stack {
-      display: grid;
-      gap: 18px;
-    }
-
-    .figure-grid-extra {
-      margin-top: 18px;
-    }
-
+    /* ==================== Cards ==================== */
     .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px;
-      min-height: 100%;
-    }
-
-    .card.accent-blue { border-top: 4px solid var(--blue); }
-    .card.accent-green { border-top: 4px solid var(--green); }
-    .card.accent-amber { border-top: 4px solid var(--amber); }
-    .card.accent-violet { border-top: 4px solid var(--violet); }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.15rem;
-      line-height: 1.25;
-    }
-
-    .card p { margin: 0; color: #475467; }
-
-    .tags {
+      position: relative;
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
+      flex-direction: column;
+      padding: var(--s6);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
+      overflow: hidden;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
     }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: var(--accent, var(--t4));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .45s var(--ease);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sh-3);
+      border-color: var(--line-strong);
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card h3 { margin-bottom: var(--s3); }
+    .card p { margin: 0; color: var(--ink-2); font-size: .96rem; }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 44px; height: 44px;
+      margin-bottom: var(--s5);
+      border-radius: var(--r);
+      background: var(--accent-wash, var(--t4-wash));
+      color: var(--accent, var(--t4));
+    }
+    .card-icon svg { width: 22px; height: 22px; }
+
+    .theme-1 { --accent: var(--t1); --accent-wash: var(--t1-wash); }
+    .theme-2 { --accent: var(--t2); --accent-wash: var(--t2-wash); }
+    .theme-3 { --accent: var(--t3); --accent-wash: var(--t3-wash); }
+    .theme-4 { --accent: var(--t4); --accent-wash: var(--t4-wash); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: auto; padding-top: var(--s5); }
 
     .tag {
       display: inline-flex;
       align-items: center;
-      min-height: 28px;
+      min-height: 26px;
       padding: 0 10px;
-      border-radius: 999px;
-      background: #eef4ff;
-      color: #194185;
-      font-size: 0.78rem;
-      font-weight: 800;
+      border-radius: var(--r-full);
+      background: var(--accent-wash, var(--t4-wash));
+      color: var(--accent, var(--t4));
+      font-size: .77rem;
+      font-weight: 600;
+      letter-spacing: .01em;
     }
 
+    /* ==================== Skills matrix ==================== */
     .matrix {
       display: grid;
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
       overflow: hidden;
-      background: var(--paper);
     }
 
     .matrix-row {
       display: grid;
-      grid-template-columns: 240px 1fr;
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 250px 1fr;
+      border-top: 1px solid var(--line);
+      transition: background-color .25s var(--ease);
     }
-
-    .matrix-row:last-child { border-bottom: 0; }
+    .matrix-row:first-child { border-top: 0; }
+    .matrix-row:hover { background: var(--surface-2); }
 
     .matrix-key {
-      padding: 18px 20px;
-      background: #f2f4f7;
-      font-weight: 850;
-      color: #344054;
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      padding: var(--s5) var(--s6);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .matrix-key::before {
+      content: "";
+      width: 6px; height: 6px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--accent, var(--t4));
     }
 
-    .matrix-value {
-      padding: 18px 20px;
-      color: #475467;
-    }
+    .matrix-value { padding: var(--s5) var(--s6); color: var(--ink-2); font-size: .95rem; }
 
-    .timeline {
+    /* ==================== Publication figures ==================== */
+    .fig-grid {
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--s5);
+      margin-bottom: var(--s8);
     }
+    .fig-card { grid-column: span 2; }
+    .fig-card:nth-child(4), .fig-card:nth-child(5) { grid-column: span 3; }
 
-    .role {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 22px;
-      padding: 22px;
-      background: var(--paper);
+    .fig-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
+      overflow: hidden;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+    }
+    .fig-card:hover { transform: translateY(-4px); box-shadow: var(--sh-3); border-color: var(--line-strong); }
+
+    .fig-media {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+    .fig-media img {
+      width: 100%;
+      /* height:auto is required — the width/height attributes (kept to reserve
+         layout space) otherwise win as presentational hints and defeat aspect-ratio. */
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      padding: var(--s3);
+      background: #ffffff;
+      transition: transform .45s var(--ease);
+    }
+    .fig-card:hover .fig-media img { transform: scale(1.03); }
+
+    .fig-zoom {
+      position: absolute;
+      right: var(--s3); bottom: var(--s3);
+      display: grid;
+      place-items: center;
+      width: 32px; height: 32px;
+      border-radius: var(--r-sm);
+      background: var(--overlay);
+      color: #fff;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .25s var(--ease), transform .25s var(--ease);
+    }
+    .fig-zoom svg { width: 16px; height: 16px; }
+    .fig-card:hover .fig-zoom, .fig-media:focus-visible .fig-zoom { opacity: 1; transform: none; }
+
+    .fig-copy { padding: var(--s5); }
+    .fig-copy h3 { font-size: 1.02rem; margin-bottom: var(--s2); }
+    .fig-copy p { margin: 0; color: var(--ink-3); font-size: .89rem; line-height: 1.5; }
+    .fig-paper {
+      display: inline-block;
+      margin-top: var(--s3);
+      color: var(--accent, var(--t4));
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
-    .role-date {
-      color: var(--blue);
-      font-weight: 850;
-      font-size: 0.9rem;
+    /* ==================== Lightbox ==================== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: var(--s4);
+      padding: var(--s7) var(--s5) var(--s5);
+      background: var(--overlay);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      transition: opacity .25s var(--ease);
+    }
+    .lightbox.is-open { opacity: 1; }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      margin: auto;
+      border-radius: var(--r);
+      background: #fff;
+      box-shadow: var(--sh-3);
+      transform: scale(.97);
+      transition: transform .3s var(--ease);
+    }
+    .lightbox.is-open .lightbox-img { transform: none; }
+
+    .lightbox-cap {
+      max-width: 68ch;
+      margin: 0 auto;
+      color: #e6edf2;
+      text-align: center;
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+    .lightbox-cap strong { display: block; color: #fff; font-weight: 600; margin-bottom: var(--s1); }
+
+    .lightbox-close {
+      position: absolute;
+      top: var(--s4); right: var(--s4);
+      width: 40px; height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: var(--r-sm);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      cursor: pointer;
+      transition: background-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.18); transform: rotate(90deg); }
+    .lightbox-close svg { width: 18px; height: 18px; }
+
+    /* ==================== Publications list ==================== */
+    .pub-year {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--s6);
+      padding-top: var(--s7);
+      margin-top: var(--s7);
+      border-top: 1px solid var(--line);
+    }
+    .pub-year:first-of-type { padding-top: 0; margin-top: 0; border-top: 0; }
+
+    .pub-year-label {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: var(--ink-3);
+      position: sticky;
+      top: calc(var(--nav-h) + var(--s5));
+      align-self: start;
     }
 
-    .role h3 { margin: 0 0 8px; font-size: 1.15rem; }
-    .role p { margin: 0; color: #475467; }
+    .pub-list { display: grid; gap: var(--s5); }
 
     .publication {
       display: grid;
-      gap: 8px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
+      gap: var(--s3);
+      padding: var(--s5) var(--s6);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .publication:hover { transform: translateY(-2px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
+
+    .pub-top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 0 var(--s2);
+      border-radius: var(--r-sm);
+      background: var(--accent-wash, var(--t4-wash));
+      color: var(--accent, var(--t4));
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .badge.venue {
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--ink-2);
+      letter-spacing: .03em;
+      text-transform: none;
+      font-size: .76rem;
     }
 
-    .publication:first-of-type { padding-top: 0; }
-    .publication:last-child { border-bottom: 0; padding-bottom: 0; }
+    .publication h3 { font-size: 1.06rem; line-height: 1.4; }
+    .pub-authors { color: var(--ink-3); font-size: .89rem; }
+    .pub-authors strong { color: var(--ink); font-weight: 600; }
 
-    .publication h3 {
-      margin: 0;
-      font-size: 1.08rem;
-      line-height: 1.35;
-    }
+    .pub-links { display: flex; flex-wrap: wrap; gap: var(--s2); }
 
-    .publication-meta {
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.92rem;
-    }
-
-    .publication a {
-      width: fit-content;
-      color: var(--blue);
-      font-weight: 850;
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 0 var(--s3);
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      color: var(--brand);
+      font-size: .82rem;
+      font-weight: 600;
       text-decoration: none;
+      transition: background-color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+    }
+    .pub-link svg { width: 14px; height: 14px; }
+    .pub-link:hover { background: var(--brand-wash); border-color: var(--brand); transform: translateY(-1px); }
+
+    /* ==================== Timeline ==================== */
+    .timeline { position: relative; display: grid; gap: var(--s5); padding-left: var(--s7); }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 11px; top: 10px; bottom: 10px;
+      width: 2px;
+      border-radius: 2px;
+      background: linear-gradient(var(--line-strong), var(--line));
     }
 
-    .publication a:hover { text-decoration: underline; }
-
-    .contact-band {
+    .role {
+      position: relative;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 22px;
-      align-items: stretch;
+      grid-template-columns: 190px 1fr;
+      gap: var(--s5);
+      padding: var(--s5) var(--s6);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-1);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
     }
+    .role::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--s7) + 5px);
+      top: 26px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent, var(--t4));
+      transition: transform .25s var(--ease);
+    }
+    .role:hover { transform: translateX(4px); box-shadow: var(--sh-2); border-color: var(--line-strong); }
+    .role:hover::before { transform: scale(1.2); }
+
+    .role-date { color: var(--accent, var(--t4)); font-size: .85rem; font-weight: 600; letter-spacing: .01em; }
+    .role h3 { margin-bottom: var(--s2); }
+    .role p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+
+    /* ==================== Contact ==================== */
+    .contact-band { display: grid; grid-template-columns: 1.02fr .98fr; gap: var(--s5); align-items: start; }
 
     .contact-card {
-      background: #101828;
-      color: white;
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
+      padding: var(--s7);
+      border-radius: var(--r-lg);
+      background: linear-gradient(150deg, #12202a, #0b1218 60%);
+      color: #fff;
+      box-shadow: var(--sh-3);
     }
+    .contact-card .kicker { color: var(--t1); }
+    .contact-card h2 { color: #fff; }
+    .contact-card > p { color: #b9c6d0; margin: var(--s4) 0 0; font-size: 1rem; }
 
-    .contact-card h2 { color: white; }
-    .contact-card p { color: #d0d5dd; }
-
-    .contact-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 24px;
-    }
+    .contact-list { display: grid; gap: var(--s2); margin-top: var(--s6); }
 
     .contact-list a {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      min-height: 48px;
-      padding: 0 14px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 7px;
+      gap: var(--s4);
+      min-height: 52px;
+      padding: 0 var(--s4);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--r);
+      color: #fff;
       text-decoration: none;
-      font-weight: 800;
-      color: white;
+      font-size: .93rem;
+      font-weight: 500;
+      transition: background-color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
     }
-
-    .contact-list a:hover { background: rgba(255, 255, 255, 0.08); }
-
-    footer {
-      padding: 26px 0;
-      background: #101828;
-      color: #d0d5dd;
-      font-size: 0.92rem;
+    .contact-list a:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.3);
+      transform: translateX(3px);
     }
+    .contact-list svg { width: 17px; height: 17px; flex: none; color: var(--t1); }
+    .contact-list .label { margin-left: auto; color: #8fa0ad; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
 
-    .footer-inner {
-      width: min(var(--max), calc(100% - 36px));
-      margin: 0 auto;
+    /* ==================== Footer ==================== */
+    footer { padding: var(--s8) 0 var(--s7); background: var(--bg-sunken); border-top: 1px solid var(--line); }
+
+    .footer-top {
       display: flex;
-      justify-content: space-between;
-      gap: 16px;
       flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--s5);
+      padding-bottom: var(--s6);
+      border-bottom: 1px solid var(--line);
     }
 
-    @media (max-width: 900px) {
-      .hero { min-height: auto; }
-      .hero-inner, .contact-band, .figure-layout { grid-template-columns: 1fr; }
-      .stats, .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      .matrix-row, .role { grid-template-columns: 1fr; }
-      .hero-inner { padding-top: 58px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0; padding: 0; list-style: none; }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 10px;
+      border-radius: var(--r-sm);
+      color: var(--ink-3);
+      font-size: .88rem;
+      text-decoration: none;
+      transition: color .2s var(--ease), background-color .2s var(--ease);
+    }
+    .footer-links a:hover { color: var(--ink); background: var(--surface); }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--s4);
+      padding-top: var(--s5);
+      color: var(--ink-3);
+      font-size: .86rem;
     }
 
-    @media (max-width: 680px) {
-      .nav-inner { align-items: flex-start; flex-direction: column; padding: 14px 0; }
-      .nav-links { justify-content: flex-start; }
-      .nav-links a { padding: 0 8px; font-size: 0.86rem; }
-      .portrait-wrap { grid-template-columns: 1fr; }
-      .portrait { width: 104px; height: 104px; }
-      .snapshot-row { grid-template-columns: 1fr; gap: 4px; }
-      section { padding: 56px 0; }
-      .button { width: 100%; }
+    /* ==================== Back to top ==================== */
+    .to-top {
+      position: fixed;
+      right: var(--s5); bottom: var(--s5);
+      z-index: 50;
+      width: 44px; height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--ink-2);
+      box-shadow: var(--sh-2);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(12px) scale(.9);
+      pointer-events: none;
+      transition: opacity .3s var(--ease), transform .3s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+    .to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+    .to-top:hover { color: var(--brand); border-color: var(--brand); }
+    .to-top svg { width: 18px; height: 18px; }
+
+    /* ==================== Responsive ==================== */
+    @media (max-width: 1080px) {
+      .hero-inner { gap: var(--s7); }
+      .pub-year { grid-template-columns: 110px 1fr; gap: var(--s5); }
+      .role { grid-template-columns: 160px 1fr; }
+    }
+
+    /* Tablet: two-up rather than collapsing straight to one column. */
+    @media (max-width: 940px) {
+      .wrap, .nav-inner, .hero-inner { width: min(var(--max), calc(100% - var(--s6))); }
+      section { padding: var(--s9) 0; }
+
+      .hero-inner { grid-template-columns: 1fr; padding: var(--s8) 0 var(--s7); }
+      .hero-panel { max-width: 560px; }
+      .hero-subtitle { max-width: 52ch; }
+
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 > :last-child:nth-child(odd) { grid-column: span 2; }
+
+      .fig-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fig-card, .fig-card:nth-child(4), .fig-card:nth-child(5) { grid-column: span 1; }
+      .fig-card:first-child { grid-column: span 2; }
+
+      .pub-year { grid-template-columns: 1fr; gap: var(--s4); }
+      .pub-year-label { position: static; font-size: 1.4rem; }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        position: fixed;
+        inset: var(--nav-h) 0 auto 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: var(--s3) var(--s5) var(--s5);
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--sh-2);
+        transform: translateY(-8px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
+      }
+      .nav-links.is-open { opacity: 1; transform: none; visibility: visible; }
+      .nav-links a { min-height: 48px; padding: 0 var(--s3); font-size: 1rem; border-radius: var(--r); }
+      .nav-links a::after { display: none; }
+      .nav-links a.is-active { background: var(--brand-wash); color: var(--brand); }
+      .nav-toggle { display: grid; }
+
+      .matrix-row { grid-template-columns: 1fr; }
+      .matrix-key { padding-bottom: 0; }
+      .matrix-value { padding-top: var(--s3); }
+
+      .role { grid-template-columns: 1fr; gap: var(--s2); }
+      .contact-band { grid-template-columns: 1fr; }
+      .contact-card { padding: var(--s6); }
+      .timeline { padding-left: var(--s6); }
+      .role::before { left: calc(-1 * var(--s6) + 4px); }
+    }
+
+    @media (max-width: 620px) {
+      section { padding: var(--s8) 0; }
+      .section-head { margin-bottom: var(--s6); }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .grid-3 > :last-child:nth-child(odd) { grid-column: auto; }
+      .fig-grid { grid-template-columns: 1fr; }
+      .fig-card:first-child { grid-column: span 1; }
+      .portrait-wrap { padding: var(--s5); }
+      .snapshot { padding: var(--s5); }
+      .snapshot-row { grid-template-columns: 1fr; gap: var(--s1); }
+      .hero-actions .button { flex: 1 1 100%; }
+      .hero-actions .button.compact { flex: 1 1 auto; }
+      .publication { padding: var(--s5); }
+      .to-top { right: var(--s4); bottom: var(--s4); }
+    }
+
+    /* ==================== Motion & print ==================== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+
+    @media print {
+      .nav, .to-top, .lightbox, .hero-actions, .nav-tools { display: none !important; }
+      body { background: #fff; color: #000; }
+      section { padding: 24px 0; border: 0; }
+      .card, .publication, .role, .fig-card { box-shadow: none; break-inside: avoid; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; }
     }
   </style>
 </head>
+
 <body>
-  <nav class="nav" aria-label="Primary navigation">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Primary">
     <div class="nav-inner">
-      <a class="brand" href="#home">Akhil Singampalli</a>
-      <ul class="nav-links">
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">A</span> Akhil Singampalli</a>
+
+      <ul class="nav-links" id="nav-menu">
         <li><a href="#research">Research</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -607,37 +1127,71 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+
+      <div class="nav-tools">
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
     </div>
   </nav>
 
   <header id="home" class="hero">
     <div class="hero-inner">
       <div>
-        <p class="eyebrow">Colorado State University | EPIC Lab</p>
-        <h1>Akhil Singampalli</h1>
-        <p class="hero-subtitle">PhD researcher in Computer Engineering specializing in scalable AI systems, continual learning, embedded TinyML, and adversarially resilient edge intelligence.</p>
-        <div class="hero-actions" aria-label="Profile links">
-          <a class="button primary" href="mailto:akhil.singampalli@colostate.edu">Contact Akhil</a>
-          <a class="button" href="https://github.com/Akhil-Singampalli" target="_blank" rel="noreferrer">GitHub Portfolio</a>
-          <a class="button" href="https://scholar.google.com/scholar?q=Akhil+Singampalli" target="_blank" rel="noreferrer">Google Scholar</a>
+        <p class="eyebrow reveal">Colorado State University &nbsp;·&nbsp; EPIC Lab</p>
+        <h1 class="reveal" style="--d:.05s">Akhil Singampalli</h1>
+        <p class="hero-subtitle reveal" style="--d:.1s">
+          PhD researcher in Computer Engineering specializing in scalable AI systems, continual
+          learning, embedded TinyML, and adversarially resilient edge intelligence.
+        </p>
+
+        <div class="hero-actions reveal" style="--d:.15s">
+          <a class="button primary" href="mailto:akhil.singampalli@colostate.edu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+            Get in touch
+          </a>
+          <!-- Revealed by JS only when assets/Akhil-Singampalli-CV.pdf actually exists,
+               so the site never shows a broken download link. -->
+          <a class="button compact" id="cv-link" href="assets/Akhil-Singampalli-CV.pdf" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            Download CV
+          </a>
+          <a class="button compact" href="https://github.com/Akhil-Singampalli" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+            GitHub
+          </a>
+          <a class="button compact" href="https://scholar.google.com/scholar?q=Akhil+Singampalli" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/></svg>
+            Scholar
+          </a>
         </div>
-        <div class="stats" aria-label="Research highlights">
-          <div class="stat"><strong>29.4x</strong><span>CIELO localization accuracy gain</span></div>
-          <div class="stat"><strong>8.0x</strong><span>ARMOR mean error reduction</span></div>
-          <div class="stat"><strong>2.74x</strong><span>DAILOC lower deployment error</span></div>
-          <div class="stat"><strong>5+</strong><span>IEEE / DATE / IPIN publications</span></div>
+
+        <div class="stats reveal" style="--d:.2s" aria-label="Research highlights">
+          <div class="stat"><strong>29.4&times;</strong><span>CIELO localization accuracy gain</span></div>
+          <div class="stat"><strong>8.0&times;</strong><span>ARMOR mean error reduction</span></div>
+          <div class="stat"><strong>2.74&times;</strong><span>DAILOC lower deployment error</span></div>
+          <div class="stat"><strong>6</strong><span>IEEE / DATE / IPIN publications</span></div>
         </div>
       </div>
 
-      <aside class="hero-panel" aria-label="Profile summary">
+      <aside class="hero-panel reveal" style="--d:.25s" aria-label="Profile summary">
         <div class="portrait-wrap">
-          <img class="portrait" src="images/Akhil_dp.jfif" alt="Akhil Singampalli profile photo" />
+          <picture>
+            <source srcset="images/portrait-256.webp" type="image/webp" />
+            <img class="portrait" src="images/portrait-256.jpg" width="256" height="256"
+                 fetchpriority="high" alt="Portrait of Akhil Singampalli" />
+          </picture>
           <div class="portrait-copy">
-            <h2>PhD Researcher in Computer Engineering</h2>
-            <p>Colorado State University, EPIC Lab. Advised by Dr. Sudeep Pasricha.</p>
+            <p>Advanced PhD candidate researching continual, trustworthy, and efficient AI for sensor-driven systems.</p>
+            <p class="advisor">Advised by Dr. Sudeep Pasricha</p>
           </div>
         </div>
-        <div class="snapshot" aria-label="Research snapshot">
+        <div class="snapshot">
           <p class="snapshot-title">Research Snapshot</p>
           <dl class="snapshot-list">
             <div class="snapshot-row">
@@ -648,33 +1202,54 @@
               <dt>Systems</dt>
               <dd>Smartphone indoor localization, Wi-Fi fingerprinting, edge inference, robotics, and mobile sensing pipelines.</dd>
             </div>
+            <div class="snapshot-row">
+              <dt>Open to</dt>
+              <dd>Research internships, applied AI roles, and collaborations on robust edge intelligence.</dd>
+            </div>
           </dl>
         </div>
       </aside>
     </div>
   </header>
 
-  <main>
+  <main id="main">
+    <!-- ===== Research ===== -->
     <section id="research">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="kicker">Research Identity</p>
           <h2>Robust AI for dynamic, heterogeneous, resource-constrained environments.</h2>
-          <p class="lede">Akhil's work bridges theoretical machine learning and production-grade embedded deployment. His research targets sensor-driven systems where models must adapt over time, run under tight memory and latency budgets, and remain trustworthy under adversarial pressure.</p>
+          <p class="lede">
+            Akhil's work bridges theoretical machine learning and production-grade embedded deployment.
+            His research targets sensor-driven systems where models must adapt over time, run under tight
+            memory and latency budgets, and remain trustworthy under adversarial pressure.
+          </p>
         </div>
+
         <div class="grid-3">
-          <article class="card accent-blue">
-            <h3>Continual & Incremental Learning</h3>
+          <article class="card theme-1 reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 9 9"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-9-9"/><path d="M18 3v5h-5M6 21v-5h5"/></svg>
+            </div>
+            <h3>Continual &amp; Incremental Learning</h3>
             <p>Architectures for class-incremental and domain-incremental adaptation without catastrophic forgetting across changing devices, buildings, and temporal conditions.</p>
             <div class="tags"><span class="tag">CIELO</span><span class="tag">DAILOC</span><span class="tag">MOELO</span></div>
           </article>
-          <article class="card accent-green">
-            <h3>Trustworthy & Explainable AI</h3>
+
+          <article class="card theme-2 reveal" style="--d:.08s">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.4 3.1 8.3 7.5 9 4.4-.7 7.5-4.6 7.5-9V6L12 3z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3>Trustworthy &amp; Explainable AI</h3>
             <p>Defense and interpretability frameworks for federated learning, model poisoning resilience, saliency-driven aggregation, and post-hoc explanation of neural maps.</p>
             <div class="tags"><span class="tag">SAFELOC</span><span class="tag">ARMOR</span><span class="tag">xKAN</span></div>
           </article>
-          <article class="card accent-amber">
-            <h3>Edge AI & TinyML</h3>
+
+          <article class="card theme-3 reveal" style="--d:.16s">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+            </div>
+            <h3>Edge AI &amp; TinyML</h3>
             <p>Efficient inference, model compression, quantization, TFLite benchmarking, and low-latency pipelines for mobile, robotics, IoT, and sensor-rich embedded systems.</p>
             <div class="tags"><span class="tag">TFLite</span><span class="tag">Distillation</span><span class="tag">Profiling</span></div>
           </article>
@@ -682,215 +1257,384 @@
       </div>
     </section>
 
-    <section id="skills">
+    <!-- ===== Skills ===== -->
+    <section id="skills" class="sunken">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="kicker">Technical Skills Matrix</p>
           <h2>Research depth with production systems instincts.</h2>
         </div>
-        <div class="matrix">
-          <div class="matrix-row"><div class="matrix-key">AI & Machine Learning</div><div class="matrix-value">Continual Learning, Federated Learning, Mixture-of-Experts, VAEs, Foundation Models, LoRA fine-tuning, XAI, Knowledge Distillation, Model Quantization</div></div>
-          <div class="matrix-row"><div class="matrix-key">Deep Learning Frameworks</div><div class="matrix-value">PyTorch, TensorFlow, Hugging Face, TensorFlow Lite, JAX familiarity</div></div>
-          <div class="matrix-row"><div class="matrix-key">Core Engineering</div><div class="matrix-value">Python, C/C++, Go, JavaScript/Node.js, Java, Bash and Shell scripting</div></div>
-          <div class="matrix-row"><div class="matrix-key">Infrastructure</div><div class="matrix-value">Docker, Ansible, Jenkins CI/CD, Linux/Unix, Slurm HPC, Git, CUDA, reproducible runtime environments</div></div>
-          <div class="matrix-row"><div class="matrix-key">Domain Specialties</div><div class="matrix-value">Embedded TinyML, signal processing, FFT/STFT, multi-modal sensor fusion, object detection, Wi-Fi CSI and fingerprinting, indoor localization</div></div>
+
+        <div class="matrix reveal">
+          <div class="matrix-row theme-1">
+            <div class="matrix-key">AI &amp; Machine Learning</div>
+            <div class="matrix-value">Continual Learning, Federated Learning, Mixture-of-Experts, VAEs, Foundation Models, LoRA fine-tuning, XAI, Knowledge Distillation, Model Quantization</div>
+          </div>
+          <div class="matrix-row theme-2">
+            <div class="matrix-key">Deep Learning Frameworks</div>
+            <div class="matrix-value">PyTorch, TensorFlow, Hugging Face, TensorFlow Lite, JAX familiarity</div>
+          </div>
+          <div class="matrix-row theme-3">
+            <div class="matrix-key">Core Engineering</div>
+            <div class="matrix-value">Python, C/C++, Go, JavaScript/Node.js, Java, Bash and Shell scripting</div>
+          </div>
+          <div class="matrix-row theme-4">
+            <div class="matrix-key">Infrastructure</div>
+            <div class="matrix-value">Docker, Ansible, Jenkins CI/CD, Linux/Unix, Slurm HPC, Git, CUDA, reproducible runtime environments</div>
+          </div>
+          <div class="matrix-row theme-1">
+            <div class="matrix-key">Domain Specialties</div>
+            <div class="matrix-value">Embedded TinyML, signal processing, FFT/STFT, multi-modal sensor fusion, object detection, Wi-Fi CSI and fingerprinting, indoor localization</div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== Publications ===== -->
     <section id="publications">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head wide reveal">
           <p class="kicker">Selected Publications</p>
           <h2>Peer-reviewed work across continual learning, resilient federated AI, and explainable localization.</h2>
-          <p class="lede">Figures from selected papers are paired with the publication record so visitors can quickly connect the visual systems work to the underlying research contributions.</p>
+          <p class="lede">Figures from selected papers sit alongside the publication record. Select any figure to open it full size.</p>
         </div>
-        <div class="figure-layout">
-          <article class="figure-card featured">
-            <div class="figure-media">
-              <img src="images/research/1.png" alt="Unified class and domain incremental learning framework for indoor localization" />
-            </div>
-            <div class="figure-copy">
+
+        <div class="fig-grid">
+          <article class="fig-card theme-1 reveal">
+            <button class="fig-media" type="button"
+                    data-full="images/research/1.png"
+                    data-title="Unified continual learning for changing buildings, devices, and regions"
+                    data-caption="A deployment-oriented view of indoor localization where class and domain shifts are handled as the environment, device population, and reference regions evolve.">
+              <picture>
+                <source srcset="images/research/1.webp" type="image/webp" />
+                <img src="images/research/1.png" width="1600" height="789" loading="lazy" decoding="async"
+                     alt="Unified class and domain incremental learning framework for indoor localization" />
+              </picture>
+              <span class="fig-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+            </button>
+            <div class="fig-copy">
               <h3>Unified continual learning for changing buildings, devices, and regions</h3>
               <p>A deployment-oriented view of indoor localization where class and domain shifts are handled as the environment, device population, and reference regions evolve.</p>
+              <span class="fig-paper">MOELO &middot; DATE 2026</span>
             </div>
           </article>
-          <div class="figure-stack">
-            <article class="figure-card">
-              <div class="figure-media">
-                <img src="images/research/3.png" alt="CIELO continual path learning and representation memory management framework" />
+
+          <article class="fig-card theme-1 reveal" style="--d:.06s">
+            <button class="fig-media" type="button"
+                    data-full="images/research/3.png"
+                    data-title="CIELO: continual path learning"
+                    data-caption="Class-incremental continual learning with representation memory management to overcome catastrophic forgetting in smartphone-based indoor localization.">
+              <picture>
+                <source srcset="images/research/3.webp" type="image/webp" />
+                <img src="images/research/3.png" width="1600" height="695" loading="lazy" decoding="async"
+                     alt="CIELO continual path learning and representation memory management framework" />
+              </picture>
+              <span class="fig-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+            </button>
+            <div class="fig-copy">
+              <h3>CIELO: continual path learning</h3>
+              <p>Class-incremental learning with representation memory management to overcome catastrophic forgetting.</p>
+              <span class="fig-paper">CIELO &middot; IEEE Access 2025</span>
+            </div>
+          </article>
+
+          <article class="fig-card theme-2 reveal" style="--d:.12s">
+            <button class="fig-media" type="button"
+                    data-full="images/research/5.png"
+                    data-title="SAFELOC / ARMOR: resilient federated AI"
+                    data-caption="Federated learning and data poisoning attack setup for indoor localization, underpinning the SAFELOC and ARMOR defense frameworks.">
+              <picture>
+                <source srcset="images/research/5.webp" type="image/webp" />
+                <img src="images/research/5.png" width="1600" height="470" loading="lazy" decoding="async"
+                     alt="Federated learning and data poisoning attack setup for indoor localization" />
+              </picture>
+              <span class="fig-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+            </button>
+            <div class="fig-copy">
+              <h3>SAFELOC / ARMOR: resilient federated AI</h3>
+              <p>Federated learning and data poisoning attack setup underpinning both defense frameworks.</p>
+              <span class="fig-paper">SAFELOC &middot; DATE 2025</span>
+            </div>
+          </article>
+
+          <article class="fig-card theme-1 reveal" style="--d:.18s">
+            <button class="fig-media" type="button"
+                    data-full="images/research/2.png"
+                    data-title="DAILOC: domain-aware adaptation"
+                    data-caption="Domain-incremental learning with disentangled representation adaptation, handling device and temporal heterogeneity across smartphones.">
+              <picture>
+                <source srcset="images/research/2.webp" type="image/webp" />
+                <img src="images/research/2.png" width="1600" height="707" loading="lazy" decoding="async"
+                     alt="DAILOC domain-aware incremental learning with disentangled representation adaptation" />
+              </picture>
+              <span class="fig-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+            </button>
+            <div class="fig-copy">
+              <h3>DAILOC: domain-aware adaptation</h3>
+              <p>Domain-incremental learning with disentangled representations across device and temporal heterogeneity.</p>
+              <span class="fig-paper">DAILOC &middot; IPIN 2025</span>
+            </div>
+          </article>
+
+          <article class="fig-card theme-3 reveal" style="--d:.24s">
+            <button class="fig-media" type="button"
+                    data-full="images/research/4.png"
+                    data-title="MOELO: mixture-of-experts routing"
+                    data-caption="Mixture-of-experts architecture with gating probabilities, giving compact expert routing for scalable class and domain incremental learning under mobile deployment constraints.">
+              <picture>
+                <source srcset="images/research/4.webp" type="image/webp" />
+                <img src="images/research/4.png" width="1600" height="1517" loading="lazy" decoding="async"
+                     alt="Mixture-of-experts architecture with gating probabilities for indoor localization" />
+              </picture>
+              <span class="fig-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>
+            </button>
+            <div class="fig-copy">
+              <h3>MOELO: mixture-of-experts routing</h3>
+              <p>Compact expert routing for scalable class and domain incremental learning under mobile constraints.</p>
+              <span class="fig-paper">MOELO &middot; DATE 2026</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="pub-year reveal">
+          <div class="pub-year-label">2026</div>
+          <div class="pub-list">
+            <article class="publication theme-2">
+              <div class="pub-top">
+                <span class="badge">Journal</span>
+                <span class="badge venue">IEEE Access</span>
               </div>
-              <div class="figure-copy">
-                <h3>CIELO: continual path learning</h3>
-                <p>Representation memory management for learning new paths while preserving prior localization knowledge.</p>
+              <h3>xKAN: Explainable AI for Smartphone-Based Indoor Localization Using Wi-Fi Fingerprinting</h3>
+              <p class="pub-authors"><strong>Akhil Singampalli</strong>, Sri Lakshmi Gandraspalli Raja Reddy, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://doi.org/10.1109/ACCESS.2026.3678819" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  DOI
+                </a>
               </div>
             </article>
-            <article class="figure-card">
-              <div class="figure-media">
-                <img src="images/research/5.png" alt="Federated learning and data poisoning attack setup for indoor localization" />
+
+            <article class="publication theme-2">
+              <div class="pub-top">
+                <span class="badge">Preprint</span>
+                <span class="badge venue">arXiv</span>
               </div>
-              <div class="figure-copy">
-                <h3>SAFELOC / ARMOR: resilient federated AI</h3>
-                <p>Threat-aware learning pipelines for detecting and mitigating poisoning attacks in distributed localization systems.</p>
+              <h3>ARMOR: Adaptive Resilience Against Model Poisoning Attacks in Continual Federated Learning for Mobile Indoor Localization</h3>
+              <p class="pub-authors">Danish Gufran, <strong>Akhil Singampalli</strong>, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://arxiv.org/abs/2603.19594" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  arXiv
+                </a>
+              </div>
+            </article>
+
+            <article class="publication theme-1">
+              <div class="pub-top">
+                <span class="badge">Conference</span>
+                <span class="badge venue">DATE</span>
+              </div>
+              <h3>Unified Class and Domain Incremental Learning with Mixture-of-Experts for Indoor Localization</h3>
+              <p class="pub-authors"><strong>Akhil Singampalli</strong>, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://arxiv.org/abs/2511.17829" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  arXiv
+                </a>
               </div>
             </article>
           </div>
         </div>
-        <div class="grid-2 figure-grid-extra">
-          <article class="figure-card">
-            <div class="figure-media">
-              <img src="images/research/2.png" alt="DAILOC domain-aware incremental learning with disentangled representation adaptation" />
-            </div>
-            <div class="figure-copy">
-              <h3>DAILOC: domain-aware adaptation</h3>
-              <p>Disentangled representation learning and class latent alignment for temporal and device-induced domain shifts.</p>
-            </div>
-          </article>
-          <article class="figure-card">
-            <div class="figure-media">
-              <img src="images/research/4.png" alt="Mixture-of-experts architecture with gating probabilities for indoor localization" />
-            </div>
-            <div class="figure-copy">
-              <h3>MOELO: mixture-of-experts routing</h3>
-              <p>Compact expert routing for scalable class and domain incremental learning under mobile deployment constraints.</p>
-            </div>
-          </article>
-        </div>
-        <div class="card figure-grid-extra">
-          <article class="publication">
-            <h3>xKAN: Explainable AI for Smartphone-Based Indoor Localization Using Wi-Fi Fingerprinting</h3>
-            <div class="publication-meta">IEEE Access, 2026 | Akhil Singampalli, Sri Lakshmi Gandraspalli Raja Reddy, Sudeep Pasricha</div>
-            <a href="https://doi.org/10.1109/ACCESS.2026.3678819" target="_blank" rel="noreferrer">DOI</a>
-          </article>
-          <article class="publication">
-            <h3>ARMOR: Adaptive Resilience Against Model Poisoning Attacks in Continual Federated Learning for Mobile Indoor Localization</h3>
-            <div class="publication-meta">arXiv, 2026 | Danish Gufran, Akhil Singampalli, Sudeep Pasricha</div>
-            <a href="https://arxiv.org/abs/2603.19594" target="_blank" rel="noreferrer">Preprint</a>
-          </article>
-          <article class="publication">
-            <h3>Unified Class and Domain Incremental Learning with Mixture-of-Experts for Indoor Localization</h3>
-            <div class="publication-meta">DATE, 2026 | Akhil Singampalli, Sudeep Pasricha</div>
-            <a href="https://arxiv.org/abs/2511.17829" target="_blank" rel="noreferrer">Preprint</a>
-          </article>
-          <article class="publication">
-            <h3>CIELO: Class-Incremental Continual Learning for Overcoming Catastrophic Forgetting With Smartphone-Based Indoor Localization</h3>
-            <div class="publication-meta">IEEE Access, 2025 | Akhil Singampalli, Danish Gufran, Sudeep Pasricha</div>
-            <a href="https://doi.org/10.1109/ACCESS.2025.3561103" target="_blank" rel="noreferrer">DOI</a>
-          </article>
-          <article class="publication">
-            <h3>DAILOC: Domain-Incremental Learning for Indoor Localization using Smartphones</h3>
-            <div class="publication-meta">IPIN, 2025 | Akhil Singampalli, Danish Gufran, Sudeep Pasricha</div>
-            <a href="https://arxiv.org/abs/2506.15554" target="_blank" rel="noreferrer">Preprint</a>
-          </article>
-          <article class="publication">
-            <h3>SAFELOC: Overcoming Data Poisoning Attacks in Heterogeneous Federated Machine Learning for Indoor Localization</h3>
-            <div class="publication-meta">DATE, 2025 | Akhil Singampalli, Danish Gufran, Sudeep Pasricha</div>
-            <a href="https://arxiv.org/abs/2411.09055" target="_blank" rel="noreferrer">Preprint</a>
-          </article>
+
+        <div class="pub-year reveal">
+          <div class="pub-year-label">2025</div>
+          <div class="pub-list">
+            <article class="publication theme-1">
+              <div class="pub-top">
+                <span class="badge">Journal</span>
+                <span class="badge venue">IEEE Access</span>
+              </div>
+              <h3>CIELO: Class-Incremental Continual Learning for Overcoming Catastrophic Forgetting With Smartphone-Based Indoor Localization</h3>
+              <p class="pub-authors"><strong>Akhil Singampalli</strong>, Danish Gufran, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://doi.org/10.1109/ACCESS.2025.3561103" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  DOI
+                </a>
+              </div>
+            </article>
+
+            <article class="publication theme-1">
+              <div class="pub-top">
+                <span class="badge">Conference</span>
+                <span class="badge venue">IPIN</span>
+              </div>
+              <h3>DAILOC: Domain-Incremental Learning for Indoor Localization using Smartphones</h3>
+              <p class="pub-authors"><strong>Akhil Singampalli</strong>, Danish Gufran, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://arxiv.org/abs/2506.15554" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  arXiv
+                </a>
+              </div>
+            </article>
+
+            <article class="publication theme-2">
+              <div class="pub-top">
+                <span class="badge">Conference</span>
+                <span class="badge venue">DATE</span>
+              </div>
+              <h3>SAFELOC: Overcoming Data Poisoning Attacks in Heterogeneous Federated Machine Learning for Indoor Localization</h3>
+              <p class="pub-authors"><strong>Akhil Singampalli</strong>, Danish Gufran, Sudeep Pasricha</p>
+              <div class="pub-links">
+                <a class="pub-link" href="https://arxiv.org/abs/2411.09055" target="_blank" rel="noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/></svg>
+                  arXiv
+                </a>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="projects">
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="sunken">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="kicker">Projects</p>
           <h2>Applied systems work beyond publications.</h2>
-          <p class="lede">Selected projects that show Akhil's range across deep learning application development, high-performance AI infrastructure, and practical measurement of model/runtime behavior.</p>
+          <p class="lede">Selected projects that show Akhil's range across deep learning application development, high-performance AI infrastructure, and practical measurement of model and runtime behavior.</p>
         </div>
+
         <div class="grid-3">
-          <article class="card accent-blue">
+          <article class="card theme-1 reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h7M7.5 6v9"/><path d="M13 18h7M16.5 18V9"/><path d="m10 11 3-3-3-3"/><path d="m14 13-3 3 3 3"/></svg>
+            </div>
             <h3>Neural Machine Translation System</h3>
             <p>Built an NMT pipeline for sequence-to-sequence translation, covering data preprocessing, tokenization, model training, evaluation, and inference. The project strengthened hands-on experience with attention-based deep learning workflows and end-to-end NLP experimentation.</p>
-            <div class="tags">
-              <span class="tag">NLP</span>
-              <span class="tag">Seq2Seq</span>
-              <span class="tag">Attention</span>
-              <span class="tag">Deep Learning</span>
-            </div>
+            <div class="tags"><span class="tag">NLP</span><span class="tag">Seq2Seq</span><span class="tag">Attention</span><span class="tag">Deep Learning</span></div>
           </article>
-          <article class="card accent-green">
+
+          <article class="card theme-3 reveal" style="--d:.08s">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V9M8 17V5M13 17v-6M18 17v-9"/><path d="M2 21h20"/></svg>
+            </div>
             <h3>GPU Profiling on NVIDIA DGX Spark</h3>
             <p>Developed a profiling workflow for GPU workloads on NVIDIA DGX Spark, focusing on runtime behavior, GPU utilization, memory pressure, and bottleneck discovery. The project connects Akhil's HPC infrastructure work with practical performance engineering for AI systems.</p>
-            <div class="tags">
-              <span class="tag">GPU Profiling</span>
-              <span class="tag">NVIDIA DGX</span>
-              <span class="tag">CUDA</span>
-              <span class="tag">HPC</span>
-            </div>
+            <div class="tags"><span class="tag">GPU Profiling</span><span class="tag">NVIDIA DGX</span><span class="tag">CUDA</span><span class="tag">HPC</span></div>
           </article>
-          <article class="card accent-violet">
+
+          <article class="card theme-2 reveal" style="--d:.16s">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4"/><path d="m13.5 5-3 14"/></svg>
+            </div>
             <h3>Robustness of Foundation Models for NL-to-Code Generation</h3>
             <p>Investigated targeted and untargeted poisoning attacks on CodeT5+, CodeBERT, and StarCoder to evaluate robustness, hallucination-prone behavior, and vulnerability under corrupted training data. Analyzed robustness gaps and defense opportunities for trustworthy LLM-based code generation.</p>
-            <div class="tags">
-              <span class="tag">Code LLMs</span>
-              <span class="tag">Poisoning Attacks</span>
-              <span class="tag">Robustness</span>
-              <span class="tag">Trustworthy AI</span>
+            <div class="tags"><span class="tag">Code LLMs</span><span class="tag">Poisoning Attacks</span><span class="tag">Robustness</span><span class="tag">Trustworthy AI</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">Experience &amp; Education</p>
+          <h2>Research, applied AI, and systems engineering.</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="role theme-1 reveal">
+            <div class="role-date">Jan 2023 &ndash; Present</div>
+            <div>
+              <h3>PhD in Computer Engineering &middot; Colorado State University</h3>
+              <p>Advanced PhD candidate in the EPIC Lab, advised by Dr. Sudeep Pasricha. Researching continual learning, trustworthy AI, TinyML, and robust mobile indoor localization.</p>
+            </div>
+          </article>
+
+          <article class="role theme-1 reveal" style="--d:.06s">
+            <div class="role-date">Current</div>
+            <div>
+              <h3>CSU VP of Research Support &middot; HPC &amp; AI Infrastructure</h3>
+              <p>Builds automated pipelines, reproducible runtime configurations, and GPU profiling suites for distributed Slurm HPC systems supporting foundation model workloads.</p>
+            </div>
+          </article>
+
+          <article class="role theme-2 reveal" style="--d:.12s">
+            <div class="role-date">Applied AI Internship</div>
+            <div>
+              <h3>Nokia Bell Labs &middot; Edge AI and Robotics</h3>
+              <p>Designed continual computer vision pipelines for real-time tracking in robotics and optimized knowledge distillation workflows for low-storage, low-latency edge deployments.</p>
+            </div>
+          </article>
+
+          <article class="role theme-3 reveal" style="--d:.18s">
+            <div class="role-date">Prior Industry</div>
+            <div>
+              <h3>Infosys Ltd &middot; Senior Systems / DevOps Engineer</h3>
+              <p>Built CI/CD pipelines for C++ codebases, Golang performance micro-benchmarking tools, and Node.js logging systems that reduced operational deployment friction.</p>
+            </div>
+          </article>
+
+          <article class="role theme-4 reveal" style="--d:.24s">
+            <div class="role-date">2016 &ndash; 2020</div>
+            <div>
+              <h3>B.Tech in Electronics and Communication Engineering</h3>
+              <p>Vignan's Institute of Information Technology.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="experience">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="kicker">Experience & Education</p>
-          <h2>Research, applied AI, and systems engineering.</h2>
-        </div>
-        <div class="timeline">
-          <article class="role">
-            <div class="role-date">Jan 2023 - Present</div>
-            <div><h3>PhD in Computer Engineering | Colorado State University</h3><p>Advanced PhD candidate in the EPIC Lab, advised by Dr. Sudeep Pasricha. Researching continual learning, trustworthy AI, TinyML, and robust mobile indoor localization.</p></div>
-          </article>
-          <article class="role">
-            <div class="role-date">Current</div>
-            <div><h3>CSU VP of Research Support | HPC & AI Infrastructure</h3><p>Builds automated pipelines, reproducible runtime configurations, and GPU profiling suites for distributed Slurm HPC systems supporting foundation model workloads.</p></div>
-          </article>
-          <article class="role">
-            <div class="role-date">Applied AI Internship</div>
-            <div><h3>Nokia Bell Labs | Edge AI and Robotics</h3><p>Designed continual computer vision pipelines for real-time tracking in robotics and optimized knowledge distillation workflows for low-storage, low-latency edge deployments.</p></div>
-          </article>
-          <article class="role">
-            <div class="role-date">Prior Industry</div>
-            <div><h3>Infosys Ltd | Senior Systems / DevOps Engineer</h3><p>Built CI/CD pipelines for C++ codebases, Golang performance micro-benchmarking tools, and Node.js logging systems that reduced operational deployment friction.</p></div>
-          </article>
-          <article class="role">
-            <div class="role-date">2016 - 2020</div>
-            <div><h3>B.Tech in Electronics and Communication Engineering</h3><p>Vignan's Institute of Information Technology.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="sunken">
       <div class="wrap contact-band">
-        <div class="contact-card">
+        <div class="contact-card reveal">
           <p class="kicker">Contact</p>
           <h2>Open to research, industry, and applied AI systems conversations.</h2>
           <p>Best fit: senior AI/ML research, edge AI and TinyML engineering, trustworthy AI, scalable ML systems, and high-performance AI infrastructure.</p>
           <div class="contact-list">
-            <a href="mailto:akhil.singampalli@colostate.edu"><span>akhil.singampalli@colostate.edu</span><span>Email</span></a>
-            <a href="tel:+19722159872"><span>(972) 215-9872</span><span>Phone</span></a>
-            <a href="https://github.com/Akhil-Singampalli" target="_blank" rel="noreferrer"><span>github.com/Akhil-Singampalli</span><span>GitHub</span></a>
-            <a href="https://scholar.google.com/scholar?q=Akhil+Singampalli" target="_blank" rel="noreferrer"><span>Google Scholar search</span><span>Scholar</span></a>
+            <a href="mailto:akhil.singampalli@colostate.edu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+              <span>akhil.singampalli@colostate.edu</span>
+              <span class="label">Email</span>
+            </a>
+            <a href="tel:+19722159872">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h-2A1.5 1.5 0 0 0 3 4.6C3 13 11 21 19.4 21a1.5 1.5 0 0 0 1.6-1.5v-2a1 1 0 0 0-.8-1l-3.3-.7a1 1 0 0 0-1 .4l-.9 1.2a13 13 0 0 1-5.7-5.7l1.2-.9a1 1 0 0 0 .4-1l-.7-3.3a1 1 0 0 0-1-.8z"/></svg>
+              <span>(972) 215-9872</span>
+              <span class="label">Phone</span>
+            </a>
+            <a href="https://github.com/Akhil-Singampalli" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+              <span>github.com/Akhil-Singampalli</span>
+              <span class="label">GitHub</span>
+            </a>
+            <a href="https://scholar.google.com/scholar?q=Akhil+Singampalli" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/></svg>
+              <span>Google Scholar</span>
+              <span class="label">Scholar</span>
+            </a>
           </div>
         </div>
+
         <div class="grid-2">
-          <article class="card accent-blue">
+          <article class="card theme-1 reveal">
             <h3>Research Fit</h3>
             <p>Continual learning, federated learning, domain adaptation, explainable AI, adversarial resilience, and learning under device heterogeneity.</p>
           </article>
-          <article class="card accent-green">
+          <article class="card theme-3 reveal" style="--d:.06s">
             <h3>Deployment Fit</h3>
             <p>Embedded inference, TinyML optimization, signal processing, model compression, latency profiling, and mobile/IoT deployment pipelines.</p>
           </article>
-          <article class="card accent-amber">
+          <article class="card theme-4 reveal" style="--d:.12s">
             <h3>Systems Fit</h3>
             <p>Docker, Slurm, CUDA, Linux automation, CI/CD, reproducibility, profiling, and cross-functional AI infrastructure support.</p>
           </article>
-          <article class="card accent-violet">
+          <article class="card theme-2 reveal" style="--d:.18s">
             <h3>Research Translation</h3>
             <p>Turns publication-grade models into testable, explainable, deployable systems for real-world sensor and edge environments.</p>
           </article>
@@ -900,10 +1644,244 @@
   </main>
 
   <footer>
-    <div class="footer-inner">
-      <span>&copy; 2026 Akhil Singampalli</span>
-      <span>Scalable AI Systems | Continual Learning | Embedded TinyML | Trustworthy Edge AI</span>
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">A</span> Akhil Singampalli</a>
+        <ul class="footer-links">
+          <li><a href="#research">Research</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Akhil Singampalli</span>
+        <span>Scalable AI Systems &middot; Continual Learning &middot; Embedded TinyML &middot; Trustworthy Edge AI</span>
+      </div>
     </div>
   </footer>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Figure viewer">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close figure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <img class="lightbox-img" id="lightbox-img" alt="" />
+    <p class="lightbox-cap" id="lightbox-cap"></p>
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Akhil Singampalli",
+    "url": "https://akhil-singampalli.github.io/akhil-site/",
+    "image": "https://akhil-singampalli.github.io/akhil-site/images/portrait-512.jpg",
+    "jobTitle": "PhD Researcher in Computer Engineering",
+    "email": "mailto:akhil.singampalli@colostate.edu",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Colorado State University",
+      "department": "EPIC Lab"
+    },
+    "knowsAbout": [
+      "Continual Learning",
+      "Federated Learning",
+      "Explainable AI",
+      "TinyML",
+      "Edge AI",
+      "Indoor Localization",
+      "Wi-Fi Fingerprinting"
+    ],
+    "sameAs": ["https://github.com/Akhil-Singampalli"]
+  }
+  </script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Theme toggle ---------- */
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+
+      function currentTheme() {
+        var set = root.getAttribute('data-theme');
+        if (set) return set;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function syncToggleLabel() {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        toggle.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+      }
+
+      toggle.addEventListener('click', function () {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        syncToggleLabel();
+      });
+      syncToggleLabel();
+
+      /* ---------- Mobile menu ---------- */
+      var navToggle = document.getElementById('nav-toggle');
+      var navMenu = document.getElementById('nav-menu');
+
+      function closeMenu() {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Open menu');
+      }
+
+      navToggle.addEventListener('click', function () {
+        var open = navMenu.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(open));
+        navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+
+      navMenu.addEventListener('click', function (e) {
+        if (e.target.closest('a')) closeMenu();
+      });
+
+      /* ---------- Sticky nav shadow + back to top ---------- */
+      var nav = document.getElementById('nav');
+      var toTop = document.getElementById('to-top');
+
+      function onScroll() {
+        var y = window.scrollY;
+        nav.classList.toggle('is-stuck', y > 8);
+        toTop.classList.toggle('is-visible', y > 700);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      toTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      });
+
+      /* ---------- Scroll reveal ---------- */
+      var revealables = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        revealables.forEach(function (el) { el.classList.add('is-in'); });
+      } else {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            revealObserver.unobserve(entry.target);
+          });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+        revealables.forEach(function (el) { revealObserver.observe(el); });
+      }
+
+      /* ---------- Scroll spy ---------- */
+      var navAnchors = Array.prototype.slice.call(navMenu.querySelectorAll('a'));
+      var sections = navAnchors
+        .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+        .filter(Boolean);
+
+      if ('IntersectionObserver' in window && sections.length) {
+        var visible = new Map();
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+          });
+
+          var bestId = null, bestRatio = 0;
+          visible.forEach(function (ratio, id) {
+            if (ratio > bestRatio) { bestRatio = ratio; bestId = id; }
+          });
+
+          navAnchors.forEach(function (a) {
+            a.classList.toggle('is-active', bestId !== null && a.getAttribute('href') === '#' + bestId);
+          });
+        }, {
+          rootMargin: '-25% 0px -55% 0px',
+          threshold: [0, 0.15, 0.4, 0.75, 1]
+        });
+        sections.forEach(function (s) { spy.observe(s); });
+      }
+
+      /* ---------- Figure lightbox ---------- */
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var lightboxCap = document.getElementById('lightbox-cap');
+      var lightboxClose = document.getElementById('lightbox-close');
+      var lastFocused = null;
+
+      function openLightbox(trigger) {
+        lastFocused = trigger;
+        var img = trigger.querySelector('img');
+        lightboxImg.src = trigger.dataset.full || img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCap.innerHTML = '';
+
+        var title = document.createElement('strong');
+        title.textContent = trigger.dataset.title || '';
+        lightboxCap.appendChild(title);
+        lightboxCap.appendChild(document.createTextNode(trigger.dataset.caption || ''));
+
+        lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function () { lightbox.classList.add('is-open'); });
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+        window.setTimeout(function () {
+          lightbox.hidden = true;
+          lightboxImg.removeAttribute('src');
+        }, reduced ? 0 : 250);
+        if (lastFocused) lastFocused.focus();
+      }
+
+      document.querySelectorAll('.fig-media').forEach(function (btn) {
+        /* Without this the button's only accessible name is the raw figure alt,
+           which never says that activating it opens anything. */
+        btn.setAttribute('aria-label', 'Open figure full size: ' + (btn.dataset.title || ''));
+        btn.addEventListener('click', function () { openLightbox(btn); });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === lightboxImg.parentNode) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (!lightbox.hidden) closeLightbox();
+          else if (navMenu.classList.contains('is-open')) { closeMenu(); navToggle.focus(); }
+        }
+        /* Keep focus on the close button while the dialog is open. */
+        if (e.key === 'Tab' && !lightbox.hidden) {
+          e.preventDefault();
+          lightboxClose.focus();
+        }
+      });
+
+      /* ---------- CV link, only if the file is really there ---------- */
+      var cvLink = document.getElementById('cv-link');
+      if (cvLink && window.fetch) {
+        fetch(cvLink.getAttribute('href'), { method: 'HEAD' })
+          .then(function (res) {
+            var type = res.headers.get('content-type') || '';
+            if (res.ok && type.indexOf('html') === -1) cvLink.hidden = false;
+          })
+          .catch(function () { /* leave hidden */ });
+      }
+
+      /* ---------- Footer year ---------- */
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
