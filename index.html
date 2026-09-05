@@ -478,10 +478,17 @@
       border-bottom: 1px solid var(--line);
     }
 
+    /* The <picture> is the flex item, not the <img>, so it needs its own
+       flex:none — otherwise it shrinks and object-fit crops the portrait
+       into a narrow vertical strip. */
+    .portrait-wrap picture { flex: none; display: block; }
+
+    /* Rounded square rather than a circle: the source photo has the hair
+       against the top edge, so a circular mask clips the head. */
     .portrait {
-      width: 92px; height: 92px;
+      width: 104px; height: 104px;
       flex: none;
-      border-radius: 50%;
+      border-radius: 14px;
       object-fit: cover;
       border: 3px solid var(--surface);
       box-shadow: var(--sh-2);
